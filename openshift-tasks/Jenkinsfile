@@ -43,7 +43,23 @@ podTemplate(
       }
 
       // TBD: The next two stages should run in parallel
-      parallel {
+      stage('Run Tests') {
+        failFast true
+        parallel {
+          stage('Maven Unit Tests') {
+            echo "Running Unit Tests"
+
+            sh "${mvnCmd} test"
+          }
+
+        // Using Maven to call SonarQube for Code Analysis
+          stage('SonarQube Code Analysis') {
+            echo "Running Code Analysis"
+
+            sh("${mvnCmd} admin:redhat -DskipTests=true -Dsonar.host.url=http://${SONARQUBE_URL}")
+          }
+        }
+      }
       // Using Maven run the unit tests
         stage('Maven Unit Tests') {
           echo "Running Unit Tests"
