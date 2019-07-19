@@ -32,7 +32,8 @@ podTemplate(
       def version = getVersionFromPom("pom.xml")
       def devTag  = "${version}" + currentBuild.number
       def prodTag = "${version}"
-      def devProject = "${}"
+      def devProject  = "${prefix}-tasks-dev"
+      def prodProject = "${prefix}-tasks-prod"
 
       // Using Maven build the war file
       // Do not run tests in this step
