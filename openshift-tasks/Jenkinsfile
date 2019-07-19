@@ -60,20 +60,6 @@ podTemplate(
           }
         }
       }
-      // Using Maven run the unit tests
-        stage('Maven Unit Tests') {
-          echo "Running Unit Tests"
-
-          sh "${mvnCmd} test"
-        }
-
-        // Using Maven to call SonarQube for Code Analysis
-        stage('SonarQube Code Analysis') {
-          echo "Running Code Analysis"
-
-          sh("${mvnCmd} admin:redhat -DskipTests=true -Dsonar.host.url=http://${SONARQUBE_URL}")
-        }
-      }
       // Publish the built war file to Nexus
       stage('Publish to Nexus') {
         echo "Publish to Nexus"
