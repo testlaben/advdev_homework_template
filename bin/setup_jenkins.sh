@@ -37,6 +37,17 @@ echo "apiVersion: v1
     strategy:
       type: "JenkinsPipeline"
       jenkinsPipelineStrategy:
+        env:
+        - name: GUID
+          value: "a96f"
+        - name: CLUSTER
+          value: "na311.openshift.opentlc.com"
+        - name: NEXUS_REG_URL
+          value: "nexus-registry.gpte-hw-cicd.svc.cluster.local:5000"
+        - name: NEXUS_URL
+          value: "nexus3.gpte-hw-cicd.svc.cluster.local:8081"
+        - name: SONARQUBE_URL
+          value: "sonarqube.gpte-hw-cicd.svc.cluster.local:9000"
         jenkinsfilePath: Jenkinsfile
 kind: List
 metadata: []" | oc create -f - -n ${GUID}-jenkins
