@@ -43,22 +43,17 @@ podTemplate(
       }
 
       // TBD: The next two stages should run in parallel
-      stage('Run Tests') {
-        failFast true
-        parallel {
-          stage('Maven Unit Tests') {
-            echo "Running Unit Tests"
+      stage('Maven Unit Tests') {
+        echo "Running Unit Tests"
 
-            sh "${mvnCmd} test"
-          }
+        sh "${mvnCmd} test"
+      }
 
         // Using Maven to call SonarQube for Code Analysis
-          stage('SonarQube Code Analysis') {
-            echo "Running Code Analysis"
+      stage('SonarQube Code Analysis') {
+        echo "Running Code Analysis"
 
-            sh("${mvnCmd} admin:redhat -DskipTests=true -Dsonar.host.url=http://${SONARQUBE_URL}")
-          }
-        }
+        sh("${mvnCmd} admin:redhat -DskipTests=true -Dsonar.host.url=http://${SONARQUBE_URL}")
       }
       // Publish the built war file to Nexus
       stage('Publish to Nexus') {
