@@ -53,7 +53,7 @@ podTemplate(
       stage('SonarQube Code Analysis') {
         echo "Running Code Analysis"
 
-        sh("${mvnCmd} admin:redhat -DskipTests=true -Dsonar.host.url=http://${SONARQUBE_URL}")
+        sh("${mvnCmd} sonar:sonar -DskipTests=true -Dsonar.host.url=http://${SONARQUBE_URL}")
       }
       // Publish the built war file to Nexus
       stage('Publish to Nexus') {
