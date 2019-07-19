@@ -55,7 +55,7 @@ podTemplate(
         stage('SonarQube Code Analysis') {
           echo "Running Code Analysis"
 
-          sh("${mvnCmd} sonar:sonar -DskipTests=true -Dsonar.host.url=http://${SONARQUBE_URL}")
+          sh("${mvnCmd} admin:redhat -DskipTests=true -Dsonar.host.url=http://${SONARQUBE_URL}")
         }
       }
       // Publish the built war file to Nexus
@@ -116,7 +116,7 @@ podTemplate(
       stage('Copy Image to Nexus container registry') {
         echo "Copy image to Nexus container registry"
 
-        sh "skopeo copy --src-tls-verify=false --dest-tls-verify=false --src-creds openshift:\$(oc whoami -t) --dest-creds admin:fbeda240-b17a-471b-b0f7-68215d872f10 docker://image-registry.openshift-image-registry.svc.cluster.local:5000/${devProject}/tasks:${devTag} docker://${NEXUS_REG_URL}/tasks:${devTag}"
+        sh "skopeo copy --src-tls-verify=false --dest-tls-verify=false --src-creds openshift:\$(oc whoami -t) --dest-creds admin:redhat docker://image-registry.openshift-image-registry.svc.cluster.local:5000/${devProject}/tasks:${devTag} docker://${NEXUS_REG_URL}/tasks:${devTag}"
 
         // TBD: Tag the built image with the production tag.
         openshift.withCluster() {
