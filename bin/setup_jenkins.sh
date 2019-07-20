@@ -38,9 +38,11 @@ items:
       type: "JenkinsPipeline"
       jenkinsPipelineStrategy:
         env:
+        - name: CLUSTER
+          value: "${CLUSTER}"
         - name: GUID
           value: "${GUID}"
-        - name: CLUSTER
+        - name: REPO
           value: "${REPO}"
         - name: NEXUS_REG_URL
           value: "nexus-registry.gpte-hw-cicd.svc.cluster.local:5000"
