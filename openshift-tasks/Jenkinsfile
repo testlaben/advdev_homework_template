@@ -173,14 +173,14 @@ podTemplate(
 
             // Update the Image on the Production Deployment Config
             def dc = openshift.selector("dc/${destApp}").object()
-            openshift.set("env", "dc/${destApp}", "VERSION='${prodTag} (${destApp})'")
+            
             // OpenShift 4
             // dc.spec.template.spec.containers[0].image="image-registry.openshift-image-registry.svc:5000/${devProject}/tasks:${prodTag}"
             // OpenShift 3
             dc.spec.template.spec.containers[0].image="docker-registry.default.svc:5000/${devProject}/tasks:${prodTag}"
 
             openshift.apply(dc)
-
+            openshift.set("env", "dc/${destApp}", "VERSION='${prodTag} (${destApp})'")
             // Update Config Map in change config files changed in the source
             openshift.selector("configmap", "${destApp}-config").delete()
             def configmap = openshift.create("configmap", "${destApp}-config", "--from-file=./configuration/application-users.properties", "--from-file=./configuration/application-roles.properties" )
