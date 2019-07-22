@@ -50,7 +50,7 @@ items:
         - name: NEXUS_URL
           value: "nexus3.gpte-hw-cicd.svc.cluster.local:8081"
         - name: SONARQUBE_URL
-          value: "sonarqube.gpte-hw-cicd.svc.cluster.local:9000"
+          value: "http://sonarqube-gpte-hw-cicd.apps.na311.openshift.opentlc.com"
         jenkinsfilePath: Jenkinsfile
 kind: List
 metadata: []" | oc create -f - -n ${GUID}-jenkins
