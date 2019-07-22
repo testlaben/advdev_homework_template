@@ -30,7 +30,7 @@ podTemplate(
       // be accessible from other stages.
       // Extract version from the pom.xml
       def version = getVersionFromPom("pom.xml")
-      def devTag  = "${version}-" + currentBuild.number
+      def devTag  = "${version}-${currentBuild.number}"
       def prodTag = "${version}"
       def devProject  = "${GUID}-tasks-dev"
       def prodProject = "${GUID}-tasks-prod"
