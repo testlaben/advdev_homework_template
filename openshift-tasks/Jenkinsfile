@@ -110,7 +110,7 @@ podTemplate(
         }
       }
 
-      stage('Integration Tests') {
+/*       stage('Integration Tests') {
         echo "Running Integration Tests"
         script {
           def status = "000"
@@ -138,7 +138,7 @@ podTemplate(
               error 'Integration Create Test Failed!'
           }
         }
-      }
+      } */
             
 
       // Copy Image to Nexus container registry
