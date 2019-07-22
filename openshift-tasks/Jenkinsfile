@@ -106,6 +106,7 @@ podTemplate(
               sleep 5
               rc = openshift.selector("rc", "tasks-${dc_version}").object()
             }
+            sleep 120
           }
         }
       }
@@ -197,6 +198,7 @@ podTemplate(
               sleep 5
               rc_prod = openshift.selector("rc", "${destApp}-${dc_version}").object()
             }
+            sleep 120
           }
         }        
       }
