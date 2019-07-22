@@ -173,7 +173,7 @@ podTemplate(
 
             // Update the Image on the Production Deployment Config
             def dc = openshift.selector("dc/${destApp}").object()
-            openshift.set("env", "dc/tasks", "VERSION='${prodTag} (${destApp})'")
+            openshift.set("env", "dc/${destApp}", "VERSION='${prodTag} (${destApp})'")
             // OpenShift 4
             // dc.spec.template.spec.containers[0].image="image-registry.openshift-image-registry.svc:5000/${devProject}/tasks:${prodTag}"
             // OpenShift 3
